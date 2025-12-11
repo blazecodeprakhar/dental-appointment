@@ -4,22 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/LanguageContext';
 import FooterLogo from "@/assets/footerlogo.png"; // logo image
-
-const quickLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'About Us', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Book Appointment', path: '/book' },
-];
-
-const services = [
-  'Teeth Cleaning',
-  'Root Canal',
-  'Crowns & Bridges',
-  'Cosmetic Whitening',
-  'Pediatric Care',
-];
 
 const socialLinks = [
   { icon: Facebook, href: '#', label: 'Facebook' },
@@ -28,7 +14,23 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
+
+  const quickLinks = [
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.about'), path: '/about' },
+    { name: t('nav.services'), path: '/services' },
+    { name: t('nav.book'), path: '/book' },
+  ];
+
+  const services = [
+    t('services.service1.title'),
+    t('services.service2.title'),
+    t('services.service3.title'),
+    t('services.service5.title'),
+    t('services.service4.title'),
+  ];
 
   // Smooth scroll to top of page
   const scrollToTop = () => {
@@ -46,7 +48,7 @@ export function Footer() {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      toast.success('Thank you for subscribing to our newsletter!');
+      toast.success(t('footer.newsletterSuccess'));
       setEmail('');
     }
   };
@@ -56,20 +58,19 @@ export function Footer() {
       {/* Main Footer */}
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
-          
+
           {/* Logo replaced + made smaller + works as scroll-to-top button */}
           <div className="space-y-4 sm:space-y-6">
             <button onClick={scrollToTop} className="flex items-center cursor-pointer">
               <img
                 src={FooterLogo}
-                alt="Footer Logo"
+                alt={t('footer.logo.alt')}
                 className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform"
               />
             </button>
 
             <p className="text-background/70 text-xs sm:text-sm leading-relaxed">
-              Your trusted partner in dental care. We provide professional, safe and comfortable
-              dental treatment with easy online booking.
+              {t('footer.description')}
             </p>
 
             <div className="flex gap-2 sm:gap-3">
@@ -88,7 +89,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-base sm:text-lg mb-4 sm:mb-6">Quick Links</h4>
+            <h4 className="font-semibold text-base sm:text-lg mb-4 sm:mb-6">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2 sm:space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -106,7 +107,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-semibold text-base sm:text-lg mb-4 sm:mb-6">Our Services</h4>
+            <h4 className="font-semibold text-base sm:text-lg mb-4 sm:mb-6">{t('footer.services')}</h4>
             <ul className="space-y-2 sm:space-y-3">
               {services.map((service) => (
                 <li key={service}>
@@ -125,12 +126,12 @@ export function Footer() {
           {/* Contact & Newsletter */}
           <div className="space-y-4 sm:space-y-6">
             <div>
-              <h4 className="font-semibold text-base sm:text-lg mb-4 sm:mb-6">Contact Info</h4>
+              <h4 className="font-semibold text-base sm:text-lg mb-4 sm:mb-6">{t('footer.contactInfo')}</h4>
               <ul className="space-y-3 sm:space-y-4">
                 <li className="flex items-start gap-2 sm:gap-3">
                   <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-secondary mt-0.5 shrink-0" />
                   <span className="text-background/70 text-xs sm:text-sm">
-                    12 Wellness Street, Demo City, 123456
+                    {t('contact.address')}
                   </span>
                 </li>
 
@@ -140,7 +141,7 @@ export function Footer() {
                     href="tel:+919876543210"
                     className="text-background/70 hover:text-secondary transition-colors text-xs sm:text-sm break-words"
                   >
-                    +91 98765 43210
+                    {t('contact.phoneDisplay')}
                   </a>
                 </li>
 
@@ -150,18 +151,18 @@ export function Footer() {
                     href="mailto:contact@brightsmiledemo.com"
                     className="text-background/70 hover:text-secondary transition-colors text-xs sm:text-sm break-all"
                   >
-                    contact@brightsmiledemo.com
+                    {t('contact.emailDisplay')}
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold text-xs sm:text-sm mb-2 sm:mb-3">Subscribe to Newsletter</h4>
+              <h4 className="font-semibold text-xs sm:text-sm mb-2 sm:mb-3">{t('footer.newsletter')}</h4>
               <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                 <Input
                   type="email"
-                  placeholder="Your email"
+                  placeholder={t('footer.newsletterPlaceholder')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-background/10 border-background/20 text-background placeholder:text-background/50 h-9 sm:h-10 text-xs sm:text-sm"
@@ -180,15 +181,15 @@ export function Footer() {
       <div className="border-t border-background/10">
         <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="text-background/60 text-xs sm:text-sm text-center md:text-left">
-            © 2025 BrightSmile Dental – Demo Website. All rights reserved.
+            {t('footer.copyright')}
           </p>
 
           <div className="flex gap-4 sm:gap-6">
             <a href="#" className="text-background/60 hover:text-background text-xs sm:text-sm transition-colors">
-              Privacy Policy
+              {t('footer.privacy')}
             </a>
             <a href="#" className="text-background/60 hover:text-background text-xs sm:text-sm transition-colors">
-              Terms of Service
+              {t('footer.terms')}
             </a>
           </div>
         </div>

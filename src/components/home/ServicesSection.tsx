@@ -1,47 +1,49 @@
 import { Sparkles, Heart, Crown, Baby, Sun, Stethoscope, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
-const services = [
-  {
-    icon: Sparkles,
-    title: 'Teeth Cleaning & Polishing',
-    description: 'A gentle cleaning session to remove plaque, tartar and stains for a brighter smile.',
-    color: 'bg-primary/10 text-primary',
-  },
-  {
-    icon: Stethoscope,
-    title: 'Root Canal Treatment',
-    description: 'Advanced pain-free root canal procedures to save your natural tooth.',
-    color: 'bg-secondary/20 text-secondary',
-  },
-  {
-    icon: Crown,
-    title: 'Crowns & Bridges',
-    description: 'Durable and natural-looking restorations to rebuild damaged or missing teeth.',
-    color: 'bg-primary/10 text-primary',
-  },
-  {
-    icon: Baby,
-    title: 'Pediatric Dentistry',
-    description: 'Friendly dental care for children with a warm and comfortable approach.',
-    color: 'bg-secondary/20 text-secondary',
-  },
-  {
-    icon: Sun,
-    title: 'Cosmetic Whitening',
-    description: 'Professional whitening treatments for a visibly brighter smile.',
-    color: 'bg-primary/10 text-primary',
-  },
-  {
-    icon: Heart,
-    title: 'Complete Dental Checkups',
-    description: 'Routine examinations to monitor and maintain your oral health.',
-    color: 'bg-secondary/20 text-secondary',
-  },
-];
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function ServicesSection() {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: Sparkles,
+      title: t('services.service1.title'),
+      description: t('services.service1.desc'),
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      icon: Stethoscope,
+      title: t('services.service2.title'),
+      description: t('services.service2.desc'),
+      color: 'bg-secondary/20 text-secondary',
+    },
+    {
+      icon: Crown,
+      title: t('services.service3.title'),
+      description: t('services.service3.desc'),
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      icon: Baby,
+      title: t('services.service4.title'),
+      description: t('services.service4.desc'),
+      color: 'bg-secondary/20 text-secondary',
+    },
+    {
+      icon: Sun,
+      title: t('services.service5.title'),
+      description: t('services.service5.desc'),
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      icon: Heart,
+      title: t('services.service6.title'),
+      description: t('services.service6.desc'),
+      color: 'bg-secondary/20 text-secondary',
+    },
+  ];
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6">
@@ -49,13 +51,13 @@ export function ServicesSection() {
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 bg-pastel rounded-full px-3 sm:px-4 py-2 mb-4">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-xs sm:text-sm font-medium text-primary">Our Expertise</span>
+            <span className="text-xs sm:text-sm font-medium text-primary">{t('services.badge')}</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-            Our <span className="text-primary">Dental Services</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 break-words">
+            {t('services.title')} <span className="text-primary">{t('services.titleHighlight')}</span>
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            We provide a complete range of dental treatments designed to restore, enhance, and protect your smile.
+          <p className="text-sm sm:text-base text-muted-foreground break-words">
+            {t('services.description')}
           </p>
         </div>
 
@@ -73,10 +75,10 @@ export function ServicesSection() {
               </div>
 
               {/* Content */}
-              <h3 className="font-semibold text-base sm:text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+              <h3 className="font-semibold text-base sm:text-lg text-foreground mb-2 group-hover:text-primary transition-colors break-words">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4">
+              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 break-words">
                 {service.description}
               </p>
 
@@ -86,7 +88,7 @@ export function ServicesSection() {
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
               >
-                Learn more
+                {t('services.learnMore')}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -96,11 +98,11 @@ export function ServicesSection() {
         {/* CTA */}
         <div className="text-center mt-8 sm:mt-12">
           <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
-            <Link 
+            <Link
               to="/services"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              View All Services
+              {t('services.viewAll')}
             </Link>
           </Button>
         </div>

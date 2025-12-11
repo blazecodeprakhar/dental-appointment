@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Sparkles,
   Stethoscope,
@@ -15,111 +16,112 @@ import {
   ArrowRight,
 } from 'lucide-react';
 
-const services = [
-  {
-    icon: Heart,
-    title: 'Routine Dental Checkup',
-    description: 'A full examination of teeth and gums to maintain oral health and detect early signs of dental issues.',
-    details: [
-      'Complete oral examination',
-      'Digital X-rays if needed',
-      'Oral cancer screening',
-      'Personalized treatment plan',
-    ],
-    color: 'bg-primary/10 text-primary',
-  },
-  {
-    icon: Sparkles,
-    title: 'Teeth Cleaning & Polishing',
-    description: 'Professional cleaning to remove tartar, plaque, and surface stains, leaving your teeth refreshed and bright.',
-    details: [
-      'Plaque and tartar removal',
-      'Teeth polishing',
-      'Fluoride treatment',
-      'Oral hygiene guidance',
-    ],
-    color: 'bg-secondary/20 text-secondary',
-  },
-  {
-    icon: Stethoscope,
-    title: 'Root Canal Treatment',
-    description: 'Advanced pain-controlled RCT procedures aimed at saving infected or damaged teeth.',
-    details: [
-      'Painless procedure',
-      'Advanced technology',
-      'Same-day treatment available',
-      'Permanent restoration',
-    ],
-    color: 'bg-primary/10 text-primary',
-  },
-  {
-    icon: Crown,
-    title: 'Crowns & Bridges',
-    description: 'Custom-made crowns and bridges that restore strength, appearance, and function to damaged teeth.',
-    details: [
-      'Natural-looking results',
-      'Durable materials',
-      'Perfect fit guaranteed',
-      'Long-lasting solution',
-    ],
-    color: 'bg-secondary/20 text-secondary',
-  },
-  {
-    icon: Baby,
-    title: 'Pediatric Dentistry',
-    description: 'Gentle dental care for children with a warm and friendly approach.',
-    details: [
-      'Child-friendly environment',
-      'Gentle techniques',
-      'Preventive care focus',
-      'Fun and comfortable visits',
-    ],
-    color: 'bg-primary/10 text-primary',
-  },
-  {
-    icon: Scissors,
-    title: 'Tooth Extraction',
-    description: 'Safe and painless extraction procedures when necessary.',
-    details: [
-      'Minimally invasive',
-      'Pain-free with anesthesia',
-      'Quick recovery',
-      'Post-care instructions',
-    ],
-    color: 'bg-secondary/20 text-secondary',
-  },
-  {
-    icon: Sun,
-    title: 'Cosmetic Dentistry',
-    description: 'Enhance your smile with whitening, veneers, reshaping, and cosmetic treatments.',
-    details: [
-      'Professional whitening',
-      'Porcelain veneers',
-      'Smile makeover',
-      'Tooth reshaping',
-    ],
-    color: 'bg-primary/10 text-primary',
-  },
-  {
-    icon: AlertTriangle,
-    title: 'Gum Disease Treatment',
-    description: 'Professional scaling, root planing, and gum care treatments.',
-    details: [
-      'Deep cleaning',
-      'Scaling and root planing',
-      'Antibiotic therapy',
-      'Preventive maintenance',
-    ],
-    color: 'bg-secondary/20 text-secondary',
-  },
-];
-
 const Services = () => {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: Heart,
+      title: t('servicesPage.service1.title'),
+      description: t('servicesPage.service1.desc'),
+      details: [
+        t('servicesPage.service1.detail1'),
+        t('servicesPage.service1.detail2'),
+        t('servicesPage.service1.detail3'),
+        t('servicesPage.service1.detail4'),
+      ],
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      icon: Sparkles,
+      title: t('servicesPage.service2.title'),
+      description: t('servicesPage.service2.desc'),
+      details: [
+        t('servicesPage.service2.detail1'),
+        t('servicesPage.service2.detail2'),
+        t('servicesPage.service2.detail3'),
+        t('servicesPage.service2.detail4'),
+      ],
+      color: 'bg-secondary/20 text-secondary',
+    },
+    {
+      icon: Stethoscope,
+      title: t('servicesPage.service3.title'),
+      description: t('servicesPage.service3.desc'),
+      details: [
+        t('servicesPage.service3.detail1'),
+        t('servicesPage.service3.detail2'),
+        t('servicesPage.service3.detail3'),
+        t('servicesPage.service3.detail4'),
+      ],
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      icon: Crown,
+      title: t('servicesPage.service4.title'),
+      description: t('servicesPage.service4.desc'),
+      details: [
+        t('servicesPage.service4.detail1'),
+        t('servicesPage.service4.detail2'),
+        t('servicesPage.service4.detail3'),
+        t('servicesPage.service4.detail4'),
+      ],
+      color: 'bg-secondary/20 text-secondary',
+    },
+    {
+      icon: Baby,
+      title: t('servicesPage.service5.title'),
+      description: t('servicesPage.service5.desc'),
+      details: [
+        t('servicesPage.service5.detail1'),
+        t('servicesPage.service5.detail2'),
+        t('servicesPage.service5.detail3'),
+        t('servicesPage.service5.detail4'),
+      ],
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      icon: Scissors,
+      title: t('servicesPage.service6.title'),
+      description: t('servicesPage.service6.desc'),
+      details: [
+        t('servicesPage.service6.detail1'),
+        t('servicesPage.service6.detail2'),
+        t('servicesPage.service6.detail3'),
+        t('servicesPage.service6.detail4'),
+      ],
+      color: 'bg-secondary/20 text-secondary',
+    },
+    {
+      icon: Sun,
+      title: t('servicesPage.service7.title'),
+      description: t('servicesPage.service7.desc'),
+      details: [
+        t('servicesPage.service7.detail1'),
+        t('servicesPage.service7.detail2'),
+        t('servicesPage.service7.detail3'),
+        t('servicesPage.service7.detail4'),
+      ],
+      color: 'bg-primary/10 text-primary',
+    },
+    {
+      icon: AlertTriangle,
+      title: t('servicesPage.service8.title'),
+      description: t('servicesPage.service8.desc'),
+      details: [
+        t('servicesPage.service8.detail1'),
+        t('servicesPage.service8.detail2'),
+        t('servicesPage.service8.detail3'),
+        t('servicesPage.service8.detail4'),
+      ],
+      color: 'bg-secondary/20 text-secondary',
+    },
+  ];
   return (
     <>
       <Helmet>
-        <title>Dental Services – BrightSmile Dental | Demo</title>
-        <meta name="description" content="Comprehensive dental services including teeth cleaning, root canal, crowns, cosmetic whitening, pediatric dentistry, and more at BrightSmile Dental." />
+        <title>{t('meta.services.title')}</title>
+        <meta name="description" content={t('meta.services.description')} />
         <link rel="canonical" href="/services" />
       </Helmet>
       <div className="min-h-screen bg-background">
@@ -130,14 +132,13 @@ const Services = () => {
             <div className="container mx-auto px-4 sm:px-6 text-center">
               <div className="inline-flex items-center gap-2 bg-card rounded-full px-3 sm:px-4 py-2 shadow-soft mb-4">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-xs sm:text-sm font-medium text-primary">Our Expertise</span>
+                <span className="text-xs sm:text-sm font-medium text-primary">{t('servicesPage.badge')}</span>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
-                Our <span className="text-primary">Dental Services</span>
+                {t('servicesPage.title')} <span className="text-primary">{t('servicesPage.titleHighlight')}</span>
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                We provide comprehensive dental solutions designed to keep your smile healthy
-                and beautiful. Explore our wide range of services below.
+                {t('servicesPage.description')}
               </p>
             </div>
           </section>
@@ -169,12 +170,12 @@ const Services = () => {
                           ))}
                         </ul>
                         <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
-                          <Link 
-                            to="/book" 
+                          <Link
+                            to="/book"
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                             className="flex items-center gap-2 justify-center sm:justify-start"
                           >
-                            Book Now
+                            {t('servicesPage.bookNow')}
                             <ArrowRight className="w-4 h-4" />
                           </Link>
                         </Button>
@@ -190,18 +191,17 @@ const Services = () => {
           <section className="py-12 sm:py-16 lg:py-20 bg-primary">
             <div className="container mx-auto px-4 sm:px-6 text-center">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-foreground mb-3 sm:mb-4">
-                Ready to Get Started?
+                {t('servicesPage.cta.title')}
               </h2>
               <p className="text-sm sm:text-base text-primary-foreground/80 max-w-xl mx-auto mb-6 sm:mb-8">
-                Book your appointment today and take the first step towards a healthier,
-                brighter smile.
+                {t('servicesPage.cta.description')}
               </p>
               <Button asChild size="xl" variant="gold" className="w-full sm:w-auto">
-                <Link 
+                <Link
                   to="/book"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
-                  Book Your Appointment
+                  {t('servicesPage.cta.button')}
                 </Link>
               </Button>
             </div>

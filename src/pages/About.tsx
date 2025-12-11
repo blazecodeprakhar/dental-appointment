@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Award,
   GraduationCap,
@@ -15,50 +16,51 @@ import {
 import doctorImage from '@/assets/doctor-arjun.jpg';
 import clinicImage from '@/assets/clinic-interior.jpg';
 
-const timeline = [
-  { year: '2013', event: 'Graduated with MDS in Prosthodontics' },
-  { year: '2014–2019', event: 'Senior Dentist at SmileCare Clinic' },
-  { year: '2020–Present', event: 'Lead Dentist at BrightSmile Dental' },
-];
-
-const values = [
-  {
-    icon: Heart,
-    title: 'Patient-First Approach',
-    description: 'Every decision we make is centered around your comfort and well-being.',
-  },
-  {
-    icon: Shield,
-    title: 'Transparent Treatment',
-    description: 'We explain every procedure clearly so you can make informed decisions.',
-  },
-  {
-    icon: Award,
-    title: 'Modern Equipment',
-    description: 'State-of-the-art technology for precise and painless treatments.',
-  },
-  {
-    icon: Users,
-    title: 'Welcoming Environment',
-    description: 'A clean, hygienic, and comfortable space for all patients.',
-  },
-];
-
-const certifications = [
-  'Master of Dental Surgery (MDS)',
-  'Prosthodontics Specialist',
-  'Cosmetic Dentistry Certified',
-  'Pediatric Dental Care',
-  'Implant Dentistry',
-  'Laser Dentistry',
-];
-
 const About = () => {
+  const { t } = useLanguage();
+
+  const timeline = [
+    { year: t('aboutPage.timeline1.year'), event: t('aboutPage.timeline1.event') },
+    { year: t('aboutPage.timeline2.year'), event: t('aboutPage.timeline2.event') },
+    { year: t('aboutPage.timeline3.year'), event: t('aboutPage.timeline3.event') },
+  ];
+
+  const values = [
+    {
+      icon: Heart,
+      title: t('aboutPage.value1.title'),
+      description: t('aboutPage.value1.desc'),
+    },
+    {
+      icon: Shield,
+      title: t('aboutPage.value2.title'),
+      description: t('aboutPage.value2.desc'),
+    },
+    {
+      icon: Award,
+      title: t('aboutPage.value3.title'),
+      description: t('aboutPage.value3.desc'),
+    },
+    {
+      icon: Users,
+      title: t('aboutPage.value4.title'),
+      description: t('aboutPage.value4.desc'),
+    },
+  ];
+
+  const certifications = [
+    t('aboutPage.cert1'),
+    t('aboutPage.cert2'),
+    t('aboutPage.cert3'),
+    t('aboutPage.cert4'),
+    t('aboutPage.cert5'),
+    t('aboutPage.cert6'),
+  ];
   return (
     <>
       <Helmet>
-        <title>About Us – BrightSmile Dental | Dr. Arjun Rao</title>
-        <meta name="description" content="Learn about Dr. Arjun Rao and BrightSmile Dental. Over 12 years of experience in cosmetic, restorative, and preventive dentistry." />
+        <title>{t('meta.about.title')}</title>
+        <meta name="description" content={t('meta.about.description')} />
         <link rel="canonical" href="/about" />
       </Helmet>
       <div className="min-h-screen bg-background">
@@ -74,7 +76,7 @@ const About = () => {
                     <div className="absolute -inset-4 bg-primary/10 rounded-3xl" />
                     <img
                       src={doctorImage}
-                      alt="Dr. Arjun Rao - Lead Dentist at BrightSmile Dental"
+                      alt={t('aboutPage.hero.image.alt')}
                       className="relative rounded-2xl shadow-premium w-full max-w-md mx-auto object-cover aspect-[4/5]"
                     />
                     <div className="absolute -bottom-6 -right-6 bg-card rounded-2xl shadow-premium p-6 border border-border/50">
@@ -84,7 +86,7 @@ const About = () => {
                         </div>
                         <div>
                           <p className="font-bold text-2xl text-foreground">12+</p>
-                          <p className="text-sm text-muted-foreground">Years Experience</p>
+                          <p className="text-sm text-muted-foreground">{t('aboutPage.experience')}</p>
                         </div>
                       </div>
                     </div>
@@ -95,19 +97,15 @@ const About = () => {
                 <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
                   <div className="inline-flex items-center gap-2 bg-card rounded-full px-3 sm:px-4 py-2 shadow-soft">
                     <Users className="w-4 h-4 text-primary" />
-                    <span className="text-xs sm:text-sm font-medium text-primary">About Our Clinic</span>
+                    <span className="text-xs sm:text-sm font-medium text-primary">{t('aboutPage.badge')}</span>
                   </div>
 
                   <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
-                    Meet <span className="text-primary">Dr. Arjun Rao</span>, MDS
+                    {t('aboutPage.title')} <span className="text-primary">{t('aboutPage.titleHighlight')}</span>, {t('aboutPage.subtitle')}
                   </h1>
 
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                    Dr. Arjun Rao is an experienced dental specialist dedicated to providing
-                    gentle, personalised, and high-quality care. With over 12 years of clinical
-                    experience and advanced training in cosmetic and restorative dentistry, he
-                    ensures that every patient receives the best possible treatment tailored to
-                    their needs.
+                    {t('aboutPage.description')}
                   </p>
 
                   <div className="space-y-2 sm:space-y-3 pt-4">
@@ -121,19 +119,19 @@ const About = () => {
 
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                     <Button asChild size="lg" className="w-full sm:w-auto">
-                      <Link 
+                      <Link
                         to="/book"
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                       >
-                        Book Appointment
+                        {t('aboutPage.book')}
                       </Link>
                     </Button>
                     <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-                      <Link 
+                      <Link
                         to="/services"
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                       >
-                        View Services
+                        {t('aboutPage.viewServices')}
                       </Link>
                     </Button>
                   </div>
@@ -147,12 +145,10 @@ const About = () => {
             <div className="container mx-auto px-4 sm:px-6">
               <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
-                  Our <span className="text-primary">Mission</span>
+                  {t('aboutPage.mission')} <span className="text-primary">{t('aboutPage.missionHighlight')}</span>
                 </h2>
                 <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  Our mission is to make dental care accessible, comfortable, and stress-free
-                  for every patient. We believe in modern technology, ethical treatment, and
-                  long-term oral health.
+                  {t('aboutPage.missionDesc')}
                 </p>
               </div>
 
@@ -178,10 +174,10 @@ const About = () => {
             <div className="container mx-auto px-4 sm:px-6">
               <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-                  Professional <span className="text-primary">Journey</span>
+                  {t('aboutPage.journey')} <span className="text-primary">{t('aboutPage.journeyHighlight')}</span>
                 </h2>
                 <p className="text-sm sm:text-base text-muted-foreground">
-                  A timeline of Dr. Arjun Rao's career and achievements in dentistry.
+                  {t('aboutPage.journeyDesc')}
                 </p>
               </div>
 
@@ -211,10 +207,10 @@ const About = () => {
             <div className="container mx-auto px-4 sm:px-6">
               <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-                  Our <span className="text-primary">Clinic</span>
+                  {t('aboutPage.clinic')} <span className="text-primary">{t('aboutPage.clinicHighlight')}</span>
                 </h2>
                 <p className="text-sm sm:text-base text-muted-foreground">
-                  Take a look at our modern, clean, and welcoming dental facility.
+                  {t('aboutPage.clinicDesc')}
                 </p>
               </div>
 
@@ -222,14 +218,14 @@ const About = () => {
                 <div className="rounded-2xl overflow-hidden shadow-card">
                   <img
                     src={clinicImage}
-                    alt="BrightSmile Dental Clinic Interior"
+                    alt={t('aboutPage.gallery1.alt')}
                     className="w-full h-64 object-cover"
                   />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-card">
                   <img
                     src={clinicImage}
-                    alt="Dental Treatment Room"
+                    alt={t('aboutPage.gallery2.alt')}
                     className="w-full h-64 object-cover"
                   />
                 </div>
@@ -242,7 +238,7 @@ const About = () => {
             <div className="container mx-auto px-4 sm:px-6">
               <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-                  Certifications & <span className="text-primary">Expertise</span>
+                  {t('aboutPage.certifications')} <span className="text-primary">{t('aboutPage.certificationsHighlight')}</span>
                 </h2>
               </div>
 

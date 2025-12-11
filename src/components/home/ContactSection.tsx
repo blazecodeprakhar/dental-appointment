@@ -4,36 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const WEB3FORMS_ACCESS_KEY = '2eddbb9f-6620-4d4f-af20-485918907cf3';
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: 'Visit Us',
-    content: '12 Wellness Street, Demo City, 123456',
-  },
-  {
-    icon: Phone,
-    title: 'Call Us',
-    content: '+91 98765 43210',
-    href: 'tel:+919876543210',
-  },
-  {
-    icon: Mail,
-    title: 'Email Us',
-    content: 'contact@brightsmiledemo.com',
-    href: 'mailto:contact@brightsmiledemo.com',
-  },
-  {
-    icon: Clock,
-    title: 'Working Hours',
-    content: 'Mon – Sat: 9:00 AM – 6:00 PM',
-    subContent: 'Sunday: Closed',
-  },
-];
-
 export function ContactSection() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -42,20 +18,46 @@ export function ContactSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: t('contact.visit'),
+      content: t('contact.address'),
+    },
+    {
+      icon: Phone,
+      title: t('contact.call'),
+      content: t('contact.phoneDisplay'),
+      href: 'tel:+919876543210',
+    },
+    {
+      icon: Mail,
+      title: t('contact.email'),
+      content: t('contact.emailDisplay'),
+      href: 'mailto:contact@brightsmiledemo.com',
+    },
+    {
+      icon: Clock,
+      title: t('contact.hours'),
+      content: t('contact.hoursMain'),
+      subContent: t('contact.hoursSub'),
+    },
+  ];
+
   const validateBasic = () => {
     if (!formData.name.trim()) {
-      toast.error('Please enter your name');
+      toast.error(t('contact.validation.name'));
       return false;
     }
     if (!formData.message.trim()) {
-      toast.error('Please write a message');
+      toast.error(t('contact.validation.message'));
       return false;
     }
     // phone optional but if present, check basic digits
     if (formData.phone.trim()) {
       const digits = formData.phone.replace(/\D/g, '');
       if (digits.length < 6) {
-        toast.error('Please enter a valid phone number');
+        toast.error(t('contact.validation.phone'));
         return false;
       }
     }
@@ -64,7 +66,7 @@ export function ContactSection() {
       // simple regex
       const re = /\S+@\S+\.\S+/;
       if (!re.test(formData.email.trim())) {
-        toast.error('Please enter a valid email');
+        toast.error(t('contact.validation.email'));
         return false;
       }
     }
@@ -91,9 +93,8 @@ export function ContactSection() {
       payload.append('subject', `Website Contact — ${formData.name}`);
 
       // optional: add a readable summary field for email body
-      const summary = `Name: ${formData.name}\nPhone: ${formData.phone || 'Not provided'}\nEmail: ${
-        formData.email || 'Not provided'
-      }\n\nMessage:\n${formData.message}`;
+      const summary = `Name: ${formData.name}\nPhone: ${formData.phone || 'Not provided'}\nEmail: ${formData.email || 'Not provided'
+        }\n\nMessage:\n${formData.message}`;
       payload.append('contact_summary', summary);
 
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -104,15 +105,15 @@ export function ContactSection() {
       const data = await res.json();
 
       if (data && data.success) {
-        toast.success('Message sent! We will get back to you soon.');
+        toast.success(t('contact.success.sent'));
         setFormData({ name: '', phone: '', email: '', message: '' });
       } else {
         console.error('Web3Forms response error:', data);
-        toast.error('Submission failed. Please try again or call us.');
+        toast.error(t('contact.error.failed'));
       }
     } catch (err) {
       console.error('Submission exception:', err);
-      toast.error('Network error. Please try again later.');
+      toast.error(t('contact.error.network'));
     } finally {
       setIsSubmitting(false);
     }
@@ -125,13 +126,13 @@ export function ContactSection() {
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 bg-card rounded-full px-3 sm:px-4 py-2 shadow-soft mb-4">
             <MapPin className="w-4 h-4 text-primary" />
-            <span className="text-xs sm:text-sm font-medium text-primary">Contact Us</span>
+            <span className="text-xs sm:text-sm font-medium text-primary">{t('contact.badge')}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
-            Get in <span className="text-primary">Touch</span>
+            {t('contact.title')} <span className="text-primary">{t('contact.titleHighlight')}</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground">
-            For general questions or concerns, reach out to us anytime. We are here to help you.
+            {t('contact.description')}
           </p>
         </div>
 
@@ -178,7 +179,7 @@ export function ContactSection() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Clinic Location"
+                title={t('contact.map.title')}
               />
             </div>
           </div>
@@ -186,16 +187,16 @@ export function ContactSection() {
           {/* Right - Contact Form */}
           <div className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-border/50 shadow-premium">
             <h3 className="font-semibold text-lg sm:text-xl text-foreground mb-4 sm:mb-6">
-              Send Us a Message
+              {t('contact.sendMessage')}
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">
-                  Full Name <span className="text-destructive">*</span>
+                  {t('contact.name')} <span className="text-destructive">*</span>
                 </label>
                 <Input
-                  placeholder="Your name"
+                  placeholder={t('contact.placeholder.name')}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
@@ -204,19 +205,19 @@ export function ContactSection() {
 
               <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-medium text-foreground">Phone</label>
+                  <label className="text-xs sm:text-sm font-medium text-foreground">{t('contact.phone')}</label>
                   <Input
-                    placeholder="+91 98765 43210"
+                    placeholder={t('contact.phoneDisplay')}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="text-sm"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-medium text-foreground">Email</label>
+                  <label className="text-xs sm:text-sm font-medium text-foreground">{t('contact.emailField')}</label>
                   <Input
                     type="email"
-                    placeholder="your@email.com"
+                    placeholder={t('contact.placeholder.email')}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="text-sm"
@@ -226,10 +227,10 @@ export function ContactSection() {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">
-                  Message <span className="text-destructive">*</span>
+                  {t('contact.message')} <span className="text-destructive">*</span>
                 </label>
                 <Textarea
-                  placeholder="How can we help you?"
+                  placeholder={t('contact.messagePlaceholder')}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="min-h-[120px] resize-none"
@@ -244,7 +245,7 @@ export function ContactSection() {
                 disabled={isSubmitting}
               >
                 <Send className="w-4 h-4 mr-2" />
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? t('contact.sending') : t('contact.send')}
               </Button>
             </form>
           </div>

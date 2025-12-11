@@ -10,9 +10,11 @@ import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { FAQSection } from '@/components/home/FAQSection';
 import { ContactSection } from '@/components/home/ContactSection';
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
   const location = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Handle hash navigation when page loads or hash changes
@@ -37,10 +39,10 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>BrightSmile Dental – Gentle Care for Your Best Smile | Demo</title>
-        <meta name="description" content="Professional dental care with Dr. Arjun Rao. Book your appointment online for teeth cleaning, root canal, cosmetic whitening, and more. Serving Demo City." />
-        <meta property="og:title" content="BrightSmile Dental – Gentle Care for Your Best Smile" />
-        <meta property="og:description" content="Professional dental care with easy online booking. Visit our modern clinic for all your dental needs." />
+        <title>{t('meta.home.title')}</title>
+        <meta name="description" content={t('meta.home.description')} />
+        <meta property="og:title" content={t('meta.og.title')} />
+        <meta property="og:description" content={t('meta.og.description')} />
         <link rel="canonical" href="/" />
       </Helmet>
       <div className="min-h-screen bg-background">

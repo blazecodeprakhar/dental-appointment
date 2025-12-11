@@ -1,16 +1,20 @@
 import { Button } from '@/components/ui/button';
 import { Star, Shield, Cpu, Award } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { cn } from '@/lib/utils';
 import heroImage from '@/assets/hero-dental.jpg';
 import doctorImage from '@/assets/doctor-arjun.jpg';
 
-const trustBadges = [
-  { icon: Star, text: '4.8 Rating', color: 'text-secondary' },
-  { icon: Cpu, text: 'Modern Equipment', color: 'text-primary' },
-  { icon: Shield, text: 'Certified Dentist', color: 'text-primary' },
-  { icon: Award, text: 'Painless Treatments', color: 'text-secondary' },
-];
-
 export function HeroSection() {
+  const { t } = useLanguage();
+
+  const trustBadges = [
+    { icon: Star, text: t('hero.rating'), color: 'text-secondary' },
+    { icon: Cpu, text: t('hero.equipment'), color: 'text-primary' },
+    { icon: Shield, text: t('hero.certified'), color: 'text-primary' },
+    { icon: Award, text: t('hero.painless'), color: 'text-secondary' },
+  ];
+
   const scrollToBooking = () => {
     document.getElementById('book-appointment')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -32,18 +36,28 @@ export function HeroSection() {
             <div className="inline-flex items-center gap-2 bg-card rounded-full px-3 sm:px-4 py-2 shadow-soft border border-border/50">
               <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
               <span className="text-xs sm:text-sm font-medium text-muted-foreground">
-                Now accepting new patients
+                {t('hero.badge')}
               </span>
             </div>
 
             {/* Headline */}
             <div className="space-y-3 sm:space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                BrightSmile Dental –{' '}
-                <span className="text-primary">Gentle Care</span> for Your Best Smile
+              <h1 className={cn(
+                "font-bold text-foreground leading-normal break-words",
+                ['hi', 'mr', 'te', 'ta', 'ml', 'kn'].includes(useLanguage().language)
+                  ? "text-xl sm:text-4xl md:text-5xl lg:text-6xl leading-relaxed"
+                  : "text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+              )}>
+                {t('hero.title')}{' '}
+                <span className="text-primary">{t('hero.titleHighlight')}</span> {t('hero.titleEnd')}
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-                Professional, safe and comfortable dental treatment with easy online booking.
+              <p className={cn(
+                "text-muted-foreground max-w-xl leading-relaxed break-words",
+                ['hi', 'mr', 'te', 'ta', 'ml', 'kn'].includes(useLanguage().language)
+                  ? "text-sm sm:text-lg md:text-xl"
+                  : "text-base sm:text-lg md:text-xl"
+              )}>
+                {t('hero.description')}
               </p>
             </div>
 
@@ -51,13 +65,13 @@ export function HeroSection() {
             <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-card rounded-2xl shadow-card border border-border/50 max-w-md">
               <img
                 src={doctorImage}
-                alt="Dr. Arjun Rao"
+                alt={t('hero.doctor.alt')}
                 className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl object-cover shadow-soft shrink-0"
               />
               <div className="min-w-0">
-                <h3 className="font-semibold text-sm sm:text-base text-foreground">Dr. Arjun Rao, MDS</h3>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  Your trusted dental specialist with over 12 years of experience
+                <h3 className="font-semibold text-sm sm:text-base text-foreground break-words">{t('hero.doctor')}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground break-words">
+                  {t('hero.doctorDesc')}
                 </p>
               </div>
             </div>
@@ -65,10 +79,10 @@ export function HeroSection() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <Button variant="hero" size="xl" onClick={scrollToBooking} className="w-full sm:w-auto">
-                Book an Appointment
+                {t('hero.book')}
               </Button>
               <Button variant="heroOutline" size="xl" asChild className="w-full sm:w-auto">
-                <a href="tel:+919876543210">Call Us Now</a>
+                <a href="tel:+919876543210">{t('hero.call')}</a>
               </Button>
             </div>
 
@@ -92,12 +106,12 @@ export function HeroSection() {
               {/* Decorative elements */}
               <div className="absolute -top-8 -left-8 w-32 h-32 bg-secondary/20 rounded-full blur-2xl" />
               <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-primary/20 rounded-full blur-2xl" />
-              
+
               {/* Main Image */}
               <div className="relative rounded-3xl overflow-hidden shadow-premium">
                 <img
                   src={heroImage}
-                  alt="Modern dental clinic with patient and dentist"
+                  alt={t('hero.image.alt')}
                   className="w-full h-[500px] lg:h-[600px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
@@ -111,7 +125,7 @@ export function HeroSection() {
                   </div>
                   <div>
                     <p className="font-bold text-2xl text-foreground">1000+</p>
-                    <p className="text-sm text-muted-foreground">Happy Patients</p>
+                    <p className="text-sm text-muted-foreground">{t('hero.patients')}</p>
                   </div>
                 </div>
               </div>

@@ -3,19 +3,21 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 import LogoNav from "@/assets/logonav.png"; // <-- Your logo image
-
-const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Contact', path: '/#contact' },
-];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.about'), path: '/about' },
+    { name: t('nav.services'), path: '/services' },
+    { name: t('nav.contact'), path: '/#contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,8 +93,8 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
 
         {/* ---- Logo Image (FULL PNG, NO CROP) ---- */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           onClick={() => {
             setIsMobileMenuOpen(false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -101,7 +103,7 @@ export function Navbar() {
         >
           <img
             src={LogoNav}
-            alt="Logo"
+            alt={t('nav.logo.alt')}
             className="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform"
           />
         </Link>
@@ -138,10 +140,10 @@ export function Navbar() {
             className="hidden xl:flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             <Phone className="w-4 h-4" />
-            +91 98765 43210
+            {t('contact.phoneDisplay')}
           </a>
           <Button onClick={scrollToBooking} size="sm" className="text-xs sm:text-sm">
-            Book Appointment
+            {t('nav.book')}
           </Button>
         </div>
 
@@ -149,7 +151,7 @@ export function Navbar() {
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
-          aria-label="Toggle menu"
+          aria-label={t('aria.toggleMenu')}
           className={cn(
             // mobile-only: transparent bg, no hover fill, visible primary icon
             'lg:hidden p-2 transition-colors',
@@ -195,7 +197,7 @@ export function Navbar() {
           ))}
           <div className="pt-4 border-t border-border">
             <Button onClick={scrollToBooking} className="w-full">
-              Book Appointment
+              {t('nav.book')}
             </Button>
           </div>
         </nav>
